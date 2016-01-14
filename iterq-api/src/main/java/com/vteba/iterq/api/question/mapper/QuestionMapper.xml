@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vteba.iterq.api.question.dao.QuestionDao" >
+  <resultMap id="questionResultMap" type="com.vteba.iterq.api.question.model.Question" >
+    <!--
+      WARNING - 结果集映射，不含Blob字段。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="ask_time" property="askTime" jdbcType="TIMESTAMP" />
+    <result column="answer_time" property="answerTime" jdbcType="TIMESTAMP" />
+    <result column="response_time" property="responseTime" jdbcType="INTEGER" />
+    <result column="answer_id" property="answerId" jdbcType="VARCHAR" />
+    <result column="answer_name" property="answerName" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="close_time" property="closeTime" jdbcType="TIMESTAMP" />
+    <result column="used_time" property="usedTime" jdbcType="BIGINT" />
+    <result column="communication" property="communication" jdbcType="INTEGER" />
+    <result column="platform" property="platform" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.vteba.iterq.api.question.model.QuestionWithBLOBs" extends="questionResultMap" >
+    <!--
+      WARNING - 结果集映射，含有Blob字段。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    <result column="ask" property="ask" jdbcType="LONGVARCHAR" />
+    <result column="answer" property="answer" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    <!--
+      WARNING - 该表所有字段。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    id, user_id, user_name, nick_name, ask_time, answer_time, response_time, answer_id, 
+    answer_name, state, close_time, used_time, communication, platform
+  </sql>
+  <sql id="Blob_Column_List" >
+    <!--
+      WARNING - 该表所有Blob字段。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    ask, answer
+  </sql>
+  <sql id="Example_Where_Clause" >
+    <!--
+      WARNING - Criteria条件查询的where语句。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    <where >
+      <foreach collection="oredCriteria" item="criteria" >
+        <if test="criteria.valid" >
+          <if test="criteria.andRelation" >
+            and
+          </if>
+          <if test="!criteria.andRelation" >
+            or
+          </if>
+          <trim prefix="(" suffix=")" prefixOverrides="and|or" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue and !criterion.orValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.noValue and criterion.orValue" >
+                  or ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue and !criterion.orValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.singleValue and criterion.orValue" >
+                  or ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue and !criterion.orValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.betweenValue and criterion.orValue" >
+                  or ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue and !criterion.orValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+                <when test="criterion.listValue and criterion.orValue" >
+                  or ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+    <if test="orderBy != null" >
+      order by ${orderBy}
+    </if>
+    <if test="start != null" >
+      limit ${start}, ${pageSize}
+    </if>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <!--
+      WARNING - Criteria条件查询的where语句。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    <where >
+      <foreach collection="params.oredCriteria" item="criteria" >
+        <if test="criteria.valid" >
+          <if test="criteria.andRelation" >
+            and
+          </if>
+          <if test="!criteria.andRelation" >
+            or
+          </if>
+          <trim prefix="(" suffix=")" prefixOverrides="and|or" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue and !criterion.orValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.noValue and criterion.orValue" >
+                  or ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue and !criterion.orValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.singleValue and criterion.orValue" >
+                  or ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue and !criterion.orValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.betweenValue and criterion.orValue" >
+                  or ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue and !criterion.orValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+                <when test="criterion.listValue and criterion.orValue" >
+                  or ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="model_where_clause" >
+    <!--
+      WARNING - 根据model条件，查询或更新的where语句。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    <where >
+      <trim prefixOverrides="and" >
+        <if test="userId != null" >
+          and user_id = #{userId,jdbcType=VARCHAR}
+        </if>
+        <if test="userName != null" >
+          and user_name = #{userName,jdbcType=VARCHAR}
+        </if>
+        <if test="nickName != null" >
+          and nick_name = #{nickName,jdbcType=VARCHAR}
+        </if>
+        <if test="askTime != null" >
+          and ask_time = #{askTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="answerTime != null" >
+          and answer_time = #{answerTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="responseTime != null" >
+          and response_time = #{responseTime,jdbcType=INTEGER}
+        </if>
+        <if test="answerId != null" >
+          and answer_id = #{answerId,jdbcType=VARCHAR}
+        </if>
+        <if test="answerName != null" >
+          and answer_name = #{answerName,jdbcType=VARCHAR}
+        </if>
+        <if test="state != null" >
+          and state = #{state,jdbcType=INTEGER}
+        </if>
+        <if test="closeTime != null" >
+          and close_time = #{closeTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="usedTime != null" >
+          and used_time = #{usedTime,jdbcType=BIGINT}
+        </if>
+        <if test="communication != null" >
+          and communication = #{communication,jdbcType=INTEGER}
+        </if>
+        <if test="platform != null" >
+          and platform = #{platform,jdbcType=INTEGER}
+        </if>
+        <if test="ask != null" >
+          and ask = #{ask,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="answer != null" >
+          and answer = #{answer,jdbcType=LONGVARCHAR}
+        </if>
+      </trim>
+    </where>
+    <if test="orderBy != null" >
+      order by ${orderBy}
+    </if>
+    <if test="start != null" >
+      limit ${start}, ${pageSize}
+    </if>
+  </sql>
+  <sql id="update_model_where_clause" >
+    <!--
+      WARNING - 根据model条件，更新的where语句。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    <where >
+      <trim prefixOverrides="and" >
+        <if test="params.userId != null" >
+          and user_id = #{params.userId,jdbcType=VARCHAR}
+        </if>
+        <if test="params.userName != null" >
+          and user_name = #{params.userName,jdbcType=VARCHAR}
+        </if>
+        <if test="params.nickName != null" >
+          and nick_name = #{params.nickName,jdbcType=VARCHAR}
+        </if>
+        <if test="params.askTime != null" >
+          and ask_time = #{params.askTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="params.answerTime != null" >
+          and answer_time = #{params.answerTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="params.responseTime != null" >
+          and response_time = #{params.responseTime,jdbcType=INTEGER}
+        </if>
+        <if test="params.answerId != null" >
+          and answer_id = #{params.answerId,jdbcType=VARCHAR}
+        </if>
+        <if test="params.answerName != null" >
+          and answer_name = #{params.answerName,jdbcType=VARCHAR}
+        </if>
+        <if test="params.state != null" >
+          and state = #{params.state,jdbcType=INTEGER}
+        </if>
+        <if test="params.closeTime != null" >
+          and close_time = #{params.closeTime,jdbcType=TIMESTAMP}
+        </if>
+        <if test="params.usedTime != null" >
+          and used_time = #{params.usedTime,jdbcType=BIGINT}
+        </if>
+        <if test="params.communication != null" >
+          and communication = #{params.communication,jdbcType=INTEGER}
+        </if>
+        <if test="params.platform != null" >
+          and platform = #{params.platform,jdbcType=INTEGER}
+        </if>
+        <if test="params.ask != null" >
+          and ask = #{params.ask,jdbcType=LONGVARCHAR}
+        </if>
+        <if test="params.answer != null" >
+          and answer = #{params.answer,jdbcType=LONGVARCHAR}
+        </if>
+      </trim>
+    </where>
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.vteba.iterq.api.question.model.QuestionBean" >
+    <!--
+      WARNING - 根据Criteria所携带条件查询数据，含有Blob字段。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="queryForList" resultMap="questionResultMap" parameterType="com.vteba.iterq.api.question.model.QuestionBean" >
+    <!--
+      WARNING - 根据Criteria所携带条件查询数据，不含Blob字段。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="queryList" resultMap="questionResultMap" parameterType="com.vteba.iterq.api.question.model.Question" >
+    <!--
+      WARNING - 根据params所携带条件查询数据。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from question
+    <if test="_parameter != null" >
+      <include refid="model_where_clause" />
+    </if>
+  </select>
+  <select id="pagedForList" resultMap="questionResultMap" parameterType="com.vteba.iterq.api.question.model.QuestionBean" >
+    <!--
+      WARNING - 根据Criteria所携带条件分页查询数据。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="pagedList" resultMap="questionResultMap" parameterType="com.vteba.iterq.api.question.model.Question" >
+    <!--
+      WARNING - 根据params所携带条件分页查询数据。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from question
+    <if test="_parameter != null" >
+      <include refid="model_where_clause" />
+    </if>
+  </select>
+  <select id="get" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    <!--
+      WARNING - 根据主键查询数据。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from question
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="unique" resultMap="questionResultMap" parameterType="com.vteba.iterq.api.question.model.Question" >
+    <!--
+      WARNING - 根据params所携带条件查询唯一记录。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from question
+    <if test="_parameter != null" >
+      <include refid="model_where_clause" />
+    </if>
+  </select>
+  <delete id="deleteById" parameterType="java.lang.String" >
+    <!--
+      WARNING - 根据主键删除记录。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    delete from question
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteBatch" parameterType="com.vteba.iterq.api.question.model.QuestionBean" >
+    <!--
+      WARNING - 根据Criteria所携带条件删除记录。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    delete from question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <delete id="deleteBulks" parameterType="com.vteba.iterq.api.question.model.Question" >
+    <!--
+      WARNING - 根据params所携带条件删除数据。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    delete from question
+    <if test="_parameter != null" >
+      <include refid="model_where_clause" />
+    </if>
+  </delete>
+  <insert id="save" parameterType="com.vteba.iterq.api.question.model.QuestionWithBLOBs" >
+    <!--
+      WARNING - 插入记录，只有非空字段才会插入到数据库。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    insert into question
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="askTime != null" >
+        ask_time,
+      </if>
+      <if test="answerTime != null" >
+        answer_time,
+      </if>
+      <if test="responseTime != null" >
+        response_time,
+      </if>
+      <if test="answerId != null" >
+        answer_id,
+      </if>
+      <if test="answerName != null" >
+        answer_name,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="closeTime != null" >
+        close_time,
+      </if>
+      <if test="usedTime != null" >
+        used_time,
+      </if>
+      <if test="communication != null" >
+        communication,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="ask != null" >
+        ask,
+      </if>
+      <if test="answer != null" >
+        answer,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="askTime != null" >
+        #{askTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="answerTime != null" >
+        #{answerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="responseTime != null" >
+        #{responseTime,jdbcType=INTEGER},
+      </if>
+      <if test="answerId != null" >
+        #{answerId,jdbcType=VARCHAR},
+      </if>
+      <if test="answerName != null" >
+        #{answerName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="closeTime != null" >
+        #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usedTime != null" >
+        #{usedTime,jdbcType=BIGINT},
+      </if>
+      <if test="communication != null" >
+        #{communication,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=INTEGER},
+      </if>
+      <if test="ask != null" >
+        #{ask,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="answer != null" >
+        #{answer,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="count" parameterType="com.vteba.iterq.api.question.model.QuestionBean" resultType="java.lang.Integer" >
+    <!--
+      WARNING - 根据Criteria所携带条件进行count计数。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    select count(*) from question
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="countBy" parameterType="com.vteba.iterq.api.question.model.Question" resultType="java.lang.Integer" >
+    <!--
+      WARNING - 根据params所携带条件计数。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    select count(*) from question
+    <if test="_parameter != null" >
+      <include refid="model_where_clause" />
+    </if>
+  </select>
+  <update id="updateBatch" parameterType="map" >
+    <!--
+      WARNING - 根据Criteria所携带条件更新指定字段。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    update question
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null" >
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.askTime != null" >
+        ask_time = #{record.askTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.answerTime != null" >
+        answer_time = #{record.answerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.responseTime != null" >
+        response_time = #{record.responseTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.answerId != null" >
+        answer_id = #{record.answerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answerName != null" >
+        answer_name = #{record.answerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.closeTime != null" >
+        close_time = #{record.closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.usedTime != null" >
+        used_time = #{record.usedTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.communication != null" >
+        communication = #{record.communication,jdbcType=INTEGER},
+      </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=INTEGER},
+      </if>
+      <if test="record.ask != null" >
+        ask = #{record.ask,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.answer != null" >
+        answer = #{record.answer,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateBulks" parameterType="map" >
+    <!--
+      WARNING - 根据params所携带条件更新指定字段。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    update question
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nickName != null" >
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.askTime != null" >
+        ask_time = #{record.askTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.answerTime != null" >
+        answer_time = #{record.answerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.responseTime != null" >
+        response_time = #{record.responseTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.answerId != null" >
+        answer_id = #{record.answerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.answerName != null" >
+        answer_name = #{record.answerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.closeTime != null" >
+        close_time = #{record.closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.usedTime != null" >
+        used_time = #{record.usedTime,jdbcType=BIGINT},
+      </if>
+      <if test="record.communication != null" >
+        communication = #{record.communication,jdbcType=INTEGER},
+      </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=INTEGER},
+      </if>
+      <if test="record.ask != null" >
+        ask = #{record.ask,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.answer != null" >
+        answer = #{record.answer,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="update_model_where_clause" />
+    </if>
+  </update>
+  <update id="updateById" parameterType="com.vteba.iterq.api.question.model.QuestionWithBLOBs" >
+    <!--
+      WARNING - 根据主键更新指定字段的数据。
+      MyBatis代码工具自动生成，不要修改！
+    -->
+    update question
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="askTime != null" >
+        ask_time = #{askTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="answerTime != null" >
+        answer_time = #{answerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="responseTime != null" >
+        response_time = #{responseTime,jdbcType=INTEGER},
+      </if>
+      <if test="answerId != null" >
+        answer_id = #{answerId,jdbcType=VARCHAR},
+      </if>
+      <if test="answerName != null" >
+        answer_name = #{answerName,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="closeTime != null" >
+        close_time = #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usedTime != null" >
+        used_time = #{usedTime,jdbcType=BIGINT},
+      </if>
+      <if test="communication != null" >
+        communication = #{communication,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=INTEGER},
+      </if>
+      <if test="ask != null" >
+        ask = #{ask,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="answer != null" >
+        answer = #{answer,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
