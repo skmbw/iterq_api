@@ -9,16 +9,12 @@ import javax.inject.Named;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.aspectj.AnnotationCacheAspect;
-import org.springframework.cache.config.CacheManagementConfigUtils;
 
 import com.google.common.collect.Lists;
-import com.vteba.cache.annotation.Prefix;
 import com.vteba.iterq.api.question.dao.QuestionDao;
 import com.vteba.iterq.api.question.model.Question;
 import com.vteba.iterq.api.question.model.QuestionBean;
 import com.vteba.iterq.api.question.service.spi.QuestionService;
-import com.vteba.service.context.spring.ApplicationContextHolder;
 import com.vteba.service.generic.impl.MyBatisServiceImpl;
 import com.vteba.tx.jdbc.mybatis.spi.BaseDao;
 import com.vteba.utils.id.ObjectId;
