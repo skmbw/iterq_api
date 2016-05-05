@@ -40,8 +40,8 @@ public class QuestionServiceImpl extends MyBatisServiceImpl<Question, QuestionBe
 	public List<Question> updateList(List<Question> quesList) {
 		List<Question> list = Lists.newArrayList();
 		Question q = new Question();
-		q.setAnswerId(ObjectId.get().toHexString());
-		q.setId(ObjectId.get().toHexString());
+		q.setAnswerId(ObjectId.get().toString());
+		q.setId(ObjectId.get().toString());
 		q.setCloseTime(new Date());
 		q.setUserName("haoa");
 		list.add(q);
@@ -75,8 +75,8 @@ public class QuestionServiceImpl extends MyBatisServiceImpl<Question, QuestionBe
 //		System.out.println(aspect);
 		List<Question> list = Lists.newArrayList();
 		Question q = new Question();
-		q.setAnswerId(ObjectId.get().toHexString());
-		q.setId(ObjectId.get().toHexString());
+		q.setAnswerId(ObjectId.get().toString());
+		q.setId(ObjectId.get().toString());
 		q.setCloseTime(new Date());
 		q.setUserName("yinlei");
 		list.add(q);
