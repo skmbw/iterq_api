@@ -2,9 +2,9 @@ package com.vteba.iterq.api.question.service.spi;
 
 import java.util.List;
 
+import com.vteba.common.service.MyBatisService;
 import com.vteba.iterq.api.question.model.Question;
 import com.vteba.iterq.api.question.model.QuestionBean;
-import com.vteba.service.generic.MyBatisService;
 
 /**
  * 问题相关的业务service接口。

@@ -11,11 +11,11 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 
 import com.google.common.collect.Lists;
+import com.vteba.common.service.impl.MyBatisServiceImpl;
 import com.vteba.iterq.api.question.dao.QuestionDao;
 import com.vteba.iterq.api.question.model.Question;
 import com.vteba.iterq.api.question.model.QuestionBean;
 import com.vteba.iterq.api.question.service.spi.QuestionService;
-import com.vteba.service.generic.impl.MyBatisServiceImpl;
 import com.vteba.tx.jdbc.mybatis.spi.BaseDao;
 import com.vteba.utils.id.ObjectId;
 
