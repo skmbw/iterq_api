@@ -16,7 +16,7 @@ import com.vteba.iterq.api.question.dao.QuestionDao;
 import com.vteba.iterq.api.question.model.Question;
 import com.vteba.iterq.api.question.model.QuestionBean;
 import com.vteba.iterq.api.question.service.spi.QuestionService;
-import com.vteba.tx.jdbc.mybatis.spi.BaseDao;
+import com.vteba.tx.dao.spi.BaseDao;
 import com.vteba.utils.id.ObjectId;
 
 /**
